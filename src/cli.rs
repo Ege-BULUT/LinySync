@@ -22,7 +22,7 @@ struct Ctx {
 
 fn connect() -> Result<Ctx, String> {
     let mut cfg = Config::load();
-    let token = me::token().ok_or("Not signed in: run `gh auth login`, or set LILYSYC_TOKEN.")?;
+    let token = me::token().ok_or("Not signed in: run `gh auth login`, or set LINYSYNC_TOKEN.")?;
     if cfg.bus.is_empty() {
         cfg.bus = format!("{}/linysync-bus", bus::github_login(&token)?);
         bus::ensure_repo(&token, &cfg.bus)?;

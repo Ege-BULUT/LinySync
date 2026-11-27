@@ -1,5 +1,5 @@
 //! This device: its id, name, look and key pair, kept in LinySync's own folder (`~/.config/linysync`, on Windows
-//! `%APPDATA%\linysync`; LILYSYC_HOME overrides), and the GitHub token the bus uses.
+//! `%APPDATA%\linysync`; LINYSYNC_HOME overrides), and the GitHub token the bus uses.
 
 use std::fs;
 use std::path::PathBuf;
@@ -11,7 +11,7 @@ use crate::os::{Env, Os};
 use crate::seal;
 
 pub fn dir() -> PathBuf {
-    if let Some(d) = std::env::var_os("LILYSYC_HOME") {
+    if let Some(d) = std::env::var_os("LINYSYNC_HOME") {
         return PathBuf::from(d);
     }
     let env = Env::here();
@@ -126,9 +126,9 @@ pub fn device(cfg: &Config) -> crate::bus::Device {
         seen: crate::bus::now(), version: env!("CARGO_PKG_VERSION").into(), ..Default::default() }
 }
 
-/// LILYSYC_TOKEN, else the GitHub CLI's.
+/// LINYSYNC_TOKEN, else the GitHub CLI's.
 pub fn token() -> Option<String> {
-    if let Ok(t) = std::env::var("LILYSYC_TOKEN") {
+    if let Ok(t) = std::env::var("LINYSYNC_TOKEN") {
         return Some(t).filter(|t| !t.is_empty());
     }
     let home = Env::here().home;

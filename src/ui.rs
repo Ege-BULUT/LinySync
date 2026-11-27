@@ -281,7 +281,7 @@ impl S {
         let want = self.bus_edit.text.trim().to_string();
         self.spawn("Signing in to GitHub…", move || {
             Job::Connected((|| {
-                let token = me::token().ok_or("Not signed in: run `gh auth login`, or set LILYSYC_TOKEN.")?;
+                let token = me::token().ok_or("Not signed in: run `gh auth login`, or set LINYSYNC_TOKEN.")?;
                 let repo = if want.is_empty() { format!("{}/linysync-bus", bus::github_login(&token)?) } else { want };
                 bus::ensure_repo(&token, &repo)?;
                 Ok(Arc::new(Bus::new(&repo, &token)))
@@ -1460,8 +1460,8 @@ pub fn run(tooling: bool) {
         // Headless renders never touch this device's own config, keys or GitHub.
         // SAFETY: still single threaded; nothing has read the environment yet.
         unsafe {
-            std::env::set_var("LILYSYC_HOME", std::env::temp_dir().join("linysync-demo"));
-            std::env::set_var("LILYSYC_TOKEN", "");
+            std::env::set_var("LINYSYNC_HOME", std::env::temp_dir().join("linysync-demo"));
+            std::env::set_var("LINYSYNC_TOKEN", "");
         }
     }
     let spec = AppSpec {
