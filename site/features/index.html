@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Features: send or receive, pick, move and finish, distro to distro · LinySync</title>
+<meta name="description" content="Pick the other Linux machine, approve, tick what the new one takes, move it end-to-end encrypted, and hand the rest, packages included, to your AI agent with GOAL.md.">
+<link rel="canonical" href="https://linysync.vercel.app/features/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LinySync">
+<meta property="og:url" content="https://linysync.vercel.app/features/">
+<meta property="og:title" content="Features: send or receive, pick, move and finish, distro to distro · LinySync">
+<meta property="og:description" content="Pick the other Linux machine, approve, tick what the new one takes, move it end-to-end encrypted, and hand the rest, packages included, to your AI agent with GOAL.md.">
+<meta property="og:image" content="https://linysync.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Features: send or receive, pick, move and finish, distro to distro · LinySync">
+<meta name="twitter:description" content="Pick the other Linux machine, approve, tick what the new one takes, move it end-to-end encrypted, and hand the rest, packages included, to your AI agent with GOAL.md.">
+<meta name="twitter:image" content="https://linysync.vercel.app/og.png">
+<meta name="theme-color" content="#14120e">
+<link rel="alternate" hreflang="en" href="https://linysync.vercel.app/features/">
+<link rel="alternate" hreflang="tr" href="https://linysync.vercel.app/tr/features/">
+<link rel="alternate" hreflang="x-default" href="https://linysync.vercel.app/features/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314120e'/%3E%3Cpath d='M4 23H12V14H20V9H25' fill='none' stroke='%23fbbf24' stroke-width='3' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='9' r='3' fill='%2314120e' stroke='%23fef3c7' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../"><span>Liny<b>~</b>Sync</span> <small>LYSY</small></a>
+    <div class="links">
+      <a href="../#how" class="opt">How it works</a>
+      <a href="../features/" class="on">Features</a>
+      <a href="../docs/">Docs</a>
+      <a href="../changelog/" class="opt">Changelog</a>
+      <a href="../#family" class="opt">Family</a>
+      <a href="../download/">Download</a>
+    </div>
+    <a class="btn lang" id="lang" href="../tr/features/" hreflang="tr" aria-label="Türkçe">TR</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <span class="caps">Features</span>
+    <h1>Everything <em>Liny~Sync</em> does</h1>
+    <p class="sub">One small Rust app on both machines that makes the new one feel like your old one, whatever distro it runs.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="frow reveal">
+      <div><span class="caps">DEVICE</span><h3>Each machine draws itself</h3><p>On the Device tab you name this machine and choose how it is drawn: a laptop or a desktop, in four colours, with its distro's name on a small badge under the screen, read from <code>/etc/os-release</code>. All drawings are original shapes, no logos.</p></div>
+      <img src="../device.png" width="2560" height="1560" alt="Each machine draws itself" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">CONNECT</span><h3>The machines on your account</h3><p>Find devices on this account lists every Linux machine registered in your bus repo. Pick one, choose to send or to receive, and the other machine shows a request its owner approves or declines.</p></div>
+      <img src="../find.png" width="2560" height="1560" alt="The machines on your account" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">PICK</span><h3>A tree you tick</h3><p>The sender scans what it has. The receiver sees it as a tree grouped by kind, with where each item lands; ticking a group ticks everything in it.</p></div>
+      <img src="../pick.png" width="2560" height="1560" alt="A tree you tick" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">MOVE</span><h3>Straight across, and it resumes</h3><p>Only the picks travel, machine to machine over your network, as an authenticated XChaCha20-Poly1305 stream. A minute without a byte counts as a cut, and the receiver asks again for what has not arrived.</p></div>
+      <img src="../sending.png" width="2560" height="1560" alt="Straight across, and it resumes" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">BRIEF</span><h3>A brief your agent can act on</h3><p>Each item lands at its path under the new home, and what was there is kept as <code>.before-linysync</code>. Then the receiver writes GOAL.md: what landed where, the problems, paths to rewrite and the package lists, so your agent installs the same tools with this distro's manager.</p></div>
+      <img src="../done.png" width="2560" height="1560" alt="A brief your agent can act on" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <span class="caps">The catalogue</span>
+    <h2>Everything it knows how to move</h2>
+    <p class="sub">Each item and where it lands under the new home.</p>
+    <div class="land fit"><table>
+      <thead><tr><th>Item</th><th>Lands at</th></tr></thead>
+      <tbody>
+      <tr><td>Desktop, Documents, Downloads, Pictures, Music, Videos</td><td><code>~/…</code>, each top-level item on its own</td></tr>
+      <tr><td>Git config</td><td><code>~/.gitconfig</code>, <code>~/.gitignore_global</code></td></tr>
+      <tr><td>SSH keys and config</td><td><code>~/.ssh</code></td></tr>
+      <tr><td>GnuPG</td><td><code>~/.gnupg</code></td></tr>
+      <tr><td>zsh and bash config</td><td><code>~/.zshrc</code>, <code>~/.zprofile</code>, <code>~/.bashrc</code>, <code>~/.bash_profile</code></td></tr>
+      <tr><td>PowerShell profile</td><td><code>$XDG_CONFIG_HOME/powershell</code></td></tr>
+      <tr><td>VS Code, Cursor and Zed settings</td><td><code>$XDG_CONFIG_HOME/Code/User</code>, <code>…/Cursor/User</code>, <code>…/zed</code></td></tr>
+      <tr><td>Wave config</td><td><code>~/.config/waveterm</code></td></tr>
+      <tr><td>Obsidian vault list</td><td><code>$XDG_CONFIG_HOME/obsidian/obsidian.json</code></td></tr>
+      <tr><td>Chrome, Brave, Edge and Chromium bookmarks</td><td><code>$XDG_CONFIG_HOME/…/Default/Bookmarks</code></td></tr>
+      <tr><td>Claude Code settings, skills, agents, commands</td><td><code>~/.claude</code></td></tr>
+      <tr><td>Codex config</td><td><code>~/.codex</code></td></tr>
+      </tbody></table></div>
+    <h2 style="margin-top:60px">Lists of what is installed</h2>
+    <p class="sub">Made on the old machine by each manager and sent as text; your agent installs from them with the new distro's.</p>
+    <div class="land fit"><table>
+      <thead><tr><th>List</th><th>Made with</th></tr></thead>
+      <tbody>
+      <tr><td>apt, installed by hand</td><td><code>apt-mark showmanual</code></td></tr>
+      <tr><td>dnf, installed by hand</td><td><code>dnf repoquery --userinstalled</code></td></tr>
+      <tr><td>pacman, installed by hand</td><td><code>pacman -Qqe</code></td></tr>
+      <tr><td>Flatpak apps</td><td><code>flatpak list --app</code></td></tr>
+      <tr><td>Snap packages</td><td><code>snap list</code></td></tr>
+      <tr><td>Homebrew</td><td><code>brew bundle dump</code></td></tr>
+      <tr><td>VS Code and Cursor extensions</td><td><code>code --list-extensions</code></td></tr>
+      <tr><td>npm, cargo, pipx</td><td><code>npm ls -g</code>, <code>cargo install --list</code>, <code>pipx list</code></td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>LinySync · MIT · Ege BULUT</span>
+    <span>Not affiliated with the Linux Foundation or any distribution; Linux is a trademark of Linus Torvalds.</span>
+  </div>
+</footer>
+
+<script src="../site.js"></script>
+</body>
+</html>

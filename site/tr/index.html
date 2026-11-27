@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinySync: bir Linux makinesini, dağıtım fark etmeksizin, uçtan uca şifreli taşı</title>
+<meta name="description" content="LinySync bir Linux makinesinin kurulumunu diğerine taşır, ikisi hangi dağıtımda olursa: dotfile'lar, kabuk ayarları, SSH ve GnuPG anahtarları, editör ayarları, yer imleri, klasörlerin ve apt, dnf, pacman, Flatpak, Snap ile Homebrew'un kurduklarının listeleri. Makineden makineye, uçtan uca şifreli; kurulumu yapay zekâ ajanın için yazılan bir not bitirir.">
+<link rel="canonical" href="https://linysync.vercel.app/tr/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LinySync">
+<meta property="og:url" content="https://linysync.vercel.app/tr/">
+<meta property="og:title" content="LinySync: bir Linux makinesini, dağıtım fark etmeksizin, uçtan uca şifreli taşı">
+<meta property="og:description" content="LinySync bir Linux makinesinin kurulumunu diğerine taşır, ikisi hangi dağıtımda olursa: dotfile'lar, kabuk ayarları, SSH ve GnuPG anahtarları, editör ayarları, yer imleri, klasörlerin ve apt, dnf, pacman, Flatpak, Snap ile Homebrew'un kurduklarının listeleri. Makineden makineye, uçtan uca şifreli; kurulumu yapay zekâ ajanın için yazılan bir not bitirir.">
+<meta property="og:image" content="https://linysync.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LinySync: bir Linux makinesini, dağıtım fark etmeksizin, uçtan uca şifreli taşı">
+<meta name="twitter:description" content="LinySync bir Linux makinesinin kurulumunu diğerine taşır, ikisi hangi dağıtımda olursa: dotfile'lar, kabuk ayarları, SSH ve GnuPG anahtarları, editör ayarları, yer imleri, klasörlerin ve apt, dnf, pacman, Flatpak, Snap ile Homebrew'un kurduklarının listeleri. Makineden makineye, uçtan uca şifreli; kurulumu yapay zekâ ajanın için yazılan bir not bitirir.">
+<meta name="twitter:image" content="https://linysync.vercel.app/og.png">
+<meta name="theme-color" content="#14120e">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "LinySync", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Linux", "url": "https://linysync.vercel.app/", "downloadUrl": "https://github.com/Ege-BULUT/LinySync/releases/latest", "softwareVersion": "0.1.0", "license": "https://opensource.org/licenses/MIT", "image": "https://linysync.vercel.app/og.png", "description": "LinySync bir Linux makinesinin kurulumunu diğerine taşır, ikisi hangi dağıtımda olursa: dotfile'lar, kabuk ayarları, SSH ve GnuPG anahtarları, editör ayarları, yer imleri, klasörlerin ve apt, dnf, pacman, Flatpak, Snap ile Homebrew'un kurduklarının listeleri. Makineden makineye, uçtan uca şifreli; kurulumu yapay zekâ ajanın için yazılan bir not bitirir.", "author": {"@type": "Person", "name": "Ege BULUT", "url": "https://github.com/Ege-BULUT"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+<link rel="alternate" hreflang="en" href="https://linysync.vercel.app/">
+<link rel="alternate" hreflang="tr" href="https://linysync.vercel.app/tr/">
+<link rel="alternate" hreflang="x-default" href="https://linysync.vercel.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314120e'/%3E%3Cpath d='M4 23H12V14H20V9H25' fill='none' stroke='%23fbbf24' stroke-width='3' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='9' r='3' fill='%2314120e' stroke='%23fef3c7' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="./"><span>Liny<b>~</b>Sync</span> <small>LYSY</small></a>
+    <div class="links">
+      <a href="#how" class="opt">Nasıl çalışır</a>
+      <a href="features/">Özellikler</a>
+      <a href="docs/">Belgeler</a>
+      <a href="changelog/" class="opt">Değişiklikler</a>
+      <a href="#family" class="opt">Aile</a>
+      <a href="download/">İndir</a>
+    </div>
+    <a class="btn lang" id="lang" href="../" hreflang="en" aria-label="English">EN</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="bg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><pattern id="pins" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="2.2" class="pin"/></pattern></defs>
+    <rect x="1130" y="430" width="286" height="242" fill="url(#pins)" class="pins"/><rect x="40" y="40" width="220" height="154" fill="url(#pins)" class="pins"/>
+    <g class="l-chan"><path class="lo" d="M -80 600 L 216 600 L 260 556 L 260 514 L 304 470 L 576 470 L 620 426 L 620 404 L 664 360 L 956 360 L 1000 316 L 1000 244 L 1044 200 L 1520 200"/><path class="lf" d="M -80 600 L 216 600 L 260 556 L 260 514 L 304 470 L 576 470 L 620 426 L 620 404 L 664 360 L 956 360 L 1000 316 L 1000 244 L 1044 200 L 1520 200"/></g>
+    <path class="lt base" d="M -80 600 L 234 600 L 260 574 L 260 496 L 286 470 L 594 470 L 620 444 L 620 386 L 646 360 L 974 360 L 1000 334 L 1000 226 L 1026 200 L 1520 200"/><path class="lt base" d="M -80 672 L 306 672 L 332 646 L 332 568 L 358 542 L 666 542 L 692 516 L 692 458 L 718 432 L 1046 432 L 1072 406 L 1072 298 L 1098 272 L 1520 272"/><path class="lt base" d="M 440 470 L 440 330 L 470 300 L 540 300"/><path class="lt base" d="M 820 360 L 820 510 L 850 540 L 920 540"/><path class="lt base" d="M 1180 200 L 1180 126 L 1210 96 L 1290 96"/><path class="lt base" d="M 160 600 L 160 530 L 130 500 L 60 500"/>
+    <path id="lt0" class="lt a" d="M -80 600 L 234 600 L 260 574 L 260 496 L 286 470 L 594 470 L 620 444 L 620 386 L 646 360 L 974 360 L 1000 334 L 1000 226 L 1026 200 L 1520 200"/><path id="lt1" class="lt b" d="M -80 672 L 306 672 L 332 646 L 332 568 L 358 542 L 666 542 L 692 516 L 692 458 L 718 432 L 1046 432 L 1072 406 L 1072 298 L 1098 272 L 1520 272"/><path class="lt c" style="animation-delay:-0.0s" d="M 440 470 L 440 330 L 470 300 L 540 300"/><path class="lt c" style="animation-delay:-0.9s" d="M 820 360 L 820 510 L 850 540 L 920 540"/><path class="lt c" style="animation-delay:-1.8s" d="M 1180 200 L 1180 126 L 1210 96 L 1290 96"/><path class="lt c" style="animation-delay:-2.7s" d="M 160 600 L 160 530 L 130 500 L 60 500"/>
+    <circle class="via" cx="540" cy="300" r="8"/><circle class="via" cx="920" cy="540" r="8"/><circle class="via" cx="1290" cy="96" r="8"/><circle class="via" cx="60" cy="500" r="8"/>
+    <circle class="pulse" r="5"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#lt0"/></animateMotion></circle><circle class="pulse" r="5"><animateMotion dur="5s" begin="2.5s" repeatCount="indefinite"><mpath href="#lt0"/></animateMotion></circle><circle class="pulse b" r="4"><animateMotion dur="6.5s" begin="1s" repeatCount="indefinite"><mpath href="#lt1"/></animateMotion></circle>
+    <rect class="cursor" x="1366" y="176" width="18" height="30" rx="2"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <img class="logo" src="../logo.svg" alt="LYSY, LinySync logo">
+      <h1>Hangi dağıtım olursa,&nbsp;<em>senin kurulumun.</em></h1>
+      <p class="lead">Liny~Sync bir Linux makinesinin kurulumunu diğerine taşır, ikisi hangi dağıtımda olursa: dotfile'lar, kabuk ayarları, SSH ve GnuPG anahtarları, editör ayarları, yer imleri, klasörlerin ve apt, dnf, pacman, Flatpak, Snap ile Homebrew'un kurduklarının listeleri. Dosyalar doğrudan makineden makineye, uçtan uca şifreli gider; bir not da yapay zekâ ajanına geriye ne kaldığını söyler.</p>
+      <div class="cta">
+        <a class="btn red" href="download/">İndir</a>
+        <a class="btn" href="#how">Nasıl çalışır</a>
+      </div>
+      <div class="ticker"><span>LinY.<b>SYnc</b></span><span>DISTRO ⇄ DISTRO</span><span>Rust &amp; Rune ile yazıldı</span><span>MIT</span></div>
+    </div>
+    <div class="shot"><img src="../sending.png" width="2560" height="1560" alt="LinySync penceresi: soldaki bu makine, sağdaki diğer Linux makinesine gönderiyor"></div>
+  </div>
+</header>
+
+<svg class="divider" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 50 L 400 50 L 420 30 L 420 42 L 440 22 L 880 22 L 900 42 L 900 30 L 920 50 L 1440 50"/><path class="run" style="animation-delay:-0s" d="M 0 50 L 400 50 L 420 30 L 420 42 L 440 22 L 880 22 L 900 42 L 900 30 L 920 50 L 1440 50"/><path d="M 0 62 L 284 62 L 300 46 L 300 52 L 316 36 L 744 36 L 760 52 L 760 46 L 776 62 L 1200 62"/><path class="run" style="animation-delay:-2s" d="M 0 62 L 284 62 L 300 46 L 300 52 L 316 36 L 744 36 L 760 52 L 760 46 L 776 62 L 1200 62"/></svg>
+
+<section id="how">
+  <div class="wrap">
+    <span class="caps">Nasıl çalışır</span>
+    <h2>GitHub tanıştırır, <em>cihazlar doğrudan konuşur</em></h2>
+    <p class="sub">Makinelerin senin özel bir GitHub deponda buluşur. Dosyalar oraya hiç gitmez: bir makineden diğerine gider, ikisi hangi dağıtımda olursa olsun.</p>
+
+    <div class="stage reveal">
+      <div class="stage-head"><span class="caps">01</span><h3>Her dağıtım gönderir, her dağıtım alır</h3><p>Bir Fedora laptop kurulumunu bir Arch masaüstüne verir, Ubuntu Debian'a; ya da başka herhangi bir ikili.</p></div>
+      <svg viewBox="0 0 1100 380" role="img" aria-label="İki Linux makinesi özel bir GitHub deposunda buluşur ve dosyaları birbirine doğrudan gönderir">
+        <defs><linearGradient id="wireGrad" x1="0" x2="1"><stop offset="0" stop-color="#b45309"/><stop offset="1" stop-color="#fef3c7"/></linearGradient></defs>
+        <path id="c1" class="wire" d="M 150 230 C 150 150 300 100 400 100"/>
+        <path id="c2" class="wire" d="M 700 100 C 800 100 950 150 950 230"/>
+        <path class="wire hot" d="M 150 230 C 150 150 300 100 400 100"/>
+        <path class="wire hot" style="animation-delay:-.6s" d="M 700 100 C 800 100 950 150 950 230"/>
+        <path id="dw" class="wire" d="M 265 300 C 420 300 450 340 550 340 S 690 300 835 300"/>
+        <path class="wire hot" style="stroke-width:4" d="M 265 300 C 420 300 450 340 550 340 S 690 300 835 300"/>
+        <g class="node repo" transform="translate(400 20)">
+          <rect width="300" height="170" rx="20"/>
+          <text class="t" x="22" y="38">you / linysync-bus</text>
+          <text class="s" x="22" y="60">Özel depo: buluşma noktası</text>
+          <text class="folder on" x="22" y="98">▸ devices/</text>
+          <text class="folder on" style="animation-delay:1s" x="22" y="124">▸ requests/</text>
+          <text class="folder on" style="animation-delay:2s" x="22" y="150">▸ transfers/</text>
+        </g>
+        <g class="node" transform="translate(35 240)"><rect width="230" height="100" rx="16"/><rect class="scr" x="16" y="18" width="40" height="27" rx="4"/><path class="ink" d="M10 50 H62 M22 26 l5 4 -5 4 M30 37 H40"/><text class="t" x="72" y="38">Fedora laptop</text><text class="s" x="72" y="60">fedora #7f3a2c91</text><text class="s" x="72" y="82" fill="#fbbf24">gönderir</text></g>
+        <g class="node" transform="translate(835 240)"><rect width="230" height="100" rx="16"/><rect class="scr" x="14" y="14" width="44" height="30" rx="3"/><path class="ink" d="M36 44 V52 M26 53 H46 M21 22 l5 4 -5 4"/><text class="t" x="72" y="38">Arch masaüstü</text><text class="s" x="72" y="60">arch #c04e19b7</text><text class="s" x="72" y="82" fill="#a3e635">alır</text></g>
+        <text class="s" x="30" y="112" style="font:500 12px var(--mono);fill:var(--muted)">kimlikler, istekler, mühürlü anahtarlar</text>
+        <text class="s" x="550" y="372" text-anchor="middle" style="font:500 12px var(--mono);fill:var(--muted)">dosyalar: makineden makineye, uçtan uca şifreli</text>
+        <circle class="pkt v" r="5"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#c1"/></animateMotion></circle>
+        <circle class="pkt v" r="5"><animateMotion dur="3s" begin="1.5s" repeatCount="indefinite"><mpath href="#c2"/></animateMotion></circle>
+        <circle class="pkt" r="7"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#dw"/></animateMotion></circle>
+        <circle class="pkt" r="7"><animateMotion dur="2.4s" begin=".8s" repeatCount="indefinite"><mpath href="#dw"/></animateMotion></circle>
+        <circle class="pkt" r="7"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite"><mpath href="#dw"/></animateMotion></circle>
+      </svg>
+    </div>
+
+    <div class="stage reveal">
+      <div class="stage-head"><span class="caps">02</span><h3>Bir makineden diğerine</h3></div>
+      <div class="steps">
+        <div class="rail" aria-hidden="true"><svg viewBox="0 0 1000 30" preserveAspectRatio="none"><path d="M 0 22 L 193 22 L 200 15 L 200 15 L 207 8 L 393 8 L 400 15 L 400 15 L 407 22 L 593 22 L 600 15 L 600 15 L 607 8 L 793 8 L 800 15 L 800 15 L 807 22 L 1000 22" fill="none" stroke="var(--edge)" stroke-width="2"/><circle r="6" fill="var(--red2)"><animateMotion dur="10s" repeatCount="indefinite" path="M 0 22 L 193 22 L 200 15 L 200 15 L 207 8 L 393 8 L 400 15 L 400 15 L 407 22 L 593 22 L 600 15 L 600 15 L 607 8 L 793 8 L 800 15 L 800 15 L 807 22 L 1000 22"/></circle></svg></div>
+        <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></div><span class="n">01</span><h4>Bul</h4><p>Hesabındaki makineler laptop ve masaüstü olarak, her biri rozetinde dağıtımıyla çıkar. Birine tıkla, seç.</p></div>
+        <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 8h15l-4-4M20 16H5l4 4"/></svg></div><span class="n">02</span><h4>İste</h4><p>Göndermeyi ya da almayı seç. Diğer cihaz sahibinden onay ister.</p></div>
+        <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div><span class="n">03</span><h4>Seç</h4><p>Gönderen elindekini bir ağaç olarak sunar; yeni makinenin alacaklarını sen işaretlersin.</p></div>
+        <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h10l6 6-6 6H4z"/></svg></div><span class="n">04</span><h4>Taşı</h4><p>Yalnızca seçilenler gider, doğrudan ve şifreli. Bağlantı koparsa eksik kalanlar yeniden istenir.</p></div>
+        <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg></div><span class="n">05</span><h4>Bitir</h4><p>Her öğe yerine iner; GOAL.md de yapay zekâ ajanına geriye ne kaldığını söyler.</p></div>
+      </div>
+    </div>
+
+    <div class="stage reveal">
+      <div class="stage-head"><span class="caps">03</span><h3>Paketler dağıtımlar arasında geçer</h3><p>Her yöneticinin listesi eski makinede yapılır; ajanın aynı araçları yenisinin yöneticisiyle kurar.</p></div>
+      <div class="land"><table>
+        <thead><tr><th>Liste</th><th>Yapıldığı komut</th><th>Yeni makinede</th></tr></thead>
+        <tbody>
+        <tr><td>apt</td><td><code>apt-mark showmanual</code></td><td>her paket bu dağıtımın yöneticisinde bulunur</td></tr>
+        <tr><td>dnf</td><td><code>dnf repoquery --userinstalled</code></td><td>her paket bu dağıtımın yöneticisinde bulunur</td></tr>
+        <tr><td>pacman</td><td><code>pacman -Qqe</code></td><td>her paket bu dağıtımın yöneticisinde bulunur</td></tr>
+        <tr><td>Flatpak</td><td><code>flatpak list --app</code></td><td>her uygulama için <code>flatpak install</code></td></tr>
+        <tr><td>Homebrew</td><td><code>brew bundle dump</code></td><td>Homebrew olan yerde <code>brew bundle</code></td></tr>
+        </tbody></table></div>
+      <p class="note">Dotfile'lar ve ayarlar yeni ev klasörü altında aynı yollara iner; <code>$XDG_CONFIG_HOME</code> her makinede ayrı okunur. Orada zaten olan ne varsa yanında <code>.before-linysync</code> olarak saklanır. Yeni dağıtımda karşılığı olmayan paketler <code>TODO-FOR-YOU.md</code>'ye yazılır.</p>
+    </div>
+    <a class="more" href="docs/">Belgeleri oku →</a>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <span class="caps">Özellikler</span>
+    <h2>Taşınmayı zahmetsiz yapanlar</h2>
+    <p class="sub">İki makinede de aynı küçük uygulama, hangi dağıtımda olurlarsa.</p>
+    <div class="grid">
+      <div class="card reveal"><span class="k">EITHER WAY</span><h3>Her seferinde gönder ya da al</h3><p>Sabit bir gönderen yok. İki makineden biri ötekine gönderir ya da ondan alır, aktarım başına seçilir.</p></div>
+      <div class="card reveal"><span class="k">ANY DISTRO</span><h3>Dağıtımdan dağıtıma</h3><p>Her makine dağıtımının adını bir rozette taşır. Yollar iki uçta da Linux yolları; böylece her ikili çalışır.</p></div>
+      <div class="card reveal"><span class="k">PACKAGES</span><h3>İkili dosyalar değil, listeler</h3><p>apt, dnf, pacman, Flatpak, Snap ve Homebrew listeleri metin olarak gider; ajanın yeni dağıtımın yöneticisiyle kurar.</p></div>
+      <div class="card reveal"><span class="k">DIRECT</span><h3>Buluttan değil, makineden makineye</h3><p>Dosyalar ağın üzerinden gider. GitHub yalnızca kimin kim olduğunu ve mühürlü anahtarları taşır.</p></div>
+      <div class="card reveal"><span class="k">SEALED</span><h3>Uçtan uca şifreli</h3><p>Teklifler, seçimler ve anahtarlar her makinenin kendi anahtarına mühürlenir; dosyalar XChaCha20-Poly1305 ile akar.</p></div>
+      <div class="card reveal"><span class="k">BRIEF</span><h3>İşi ajanın bitirir</h3><p>GOAL.md neyin nereye indiğini, hangi yolların değişeceğini ve hangi paketlerin kurulacağını söyler.</p></div>
+    </div>
+    <a class="more" href="features/">Tüm özellikler →</a>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <span class="caps">Uygulama</span>
+    <h2><em>Liny~Sync</em> penceresi</h2>
+    <p class="sub">Bu makine hep solda, diğeri sağda; çizgiler gönderenden alana akar.</p>
+    <div class="gallery">
+      <figure class="reveal"><img src="../find.png" width="2560" height="1560" alt="01 · Bu hesaptaki makineler, dağıtımlarıyla" loading="lazy"><figcaption>01 · Bu hesaptaki makineler, dağıtımlarıyla</figcaption></figure>
+      <figure class="reveal"><img src="../hover-send.png" width="2560" height="1560" alt="02 · Gönder ya da al, bu aktarım için" loading="lazy"><figcaption>02 · Gönder ya da al, bu aktarım için</figcaption></figure>
+      <figure class="reveal"><img src="../request.png" width="2560" height="1560" alt="03 · Diğer makine onaylar" loading="lazy"><figcaption>03 · Diğer makine onaylar</figcaption></figure>
+      <figure class="reveal"><img src="../pick.png" width="2560" height="1560" alt="04 · Yeni makinenin alacaklarını seç" loading="lazy"><figcaption>04 · Yeni makinenin alacaklarını seç</figcaption></figure>
+      <figure class="reveal"><img src="../sending.png" width="2560" height="1560" alt="Gönderiliyor: çizgiler alana doğru akar" loading="lazy"><figcaption>Gönderiliyor: çizgiler alana doğru akar</figcaption></figure>
+      <figure class="reveal"><img src="../done.png" width="2560" height="1560" alt="Bitti: not ajanın için hazır" loading="lazy"><figcaption>Bitti: not ajanın için hazır</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="moves">
+  <div class="wrap">
+    <span class="caps">Taşınırken</span>
+    <h2>Neler taşınır, <em>neler kalır</em></h2>
+    <p class="sub">LinySync bir Linux makinesini senin yapanı taşır, yeni dağıtımın kendi yoluyla yapacaklarını da açıkça söyler.</p>
+    <div class="cols">
+      <div class="box yes reveal">
+        <h3>Taşınanlar</h3>
+        <ul>
+          <li><strong>Dosyalar:</strong> Masaüstü, Belgeler, İndirilenler, Resimler, Müzik ve Videolar; her üst öğe ayrı seçilir. <code>node_modules</code>, <code>target</code>, <code>.venv</code> gibi kaynaktan yeniden kurulan klasörler geride kalır.</li>
+          <li><strong>Kabuk ve git:</strong> git ayarı, SSH ve GnuPG anahtarları, zsh ve bash ayarları, varsa bir PowerShell profili.</li>
+          <li><strong>Editörler ve terminaller:</strong> VS Code, Cursor, Zed, Wave.</li>
+          <li><strong>Notlar, tarayıcılar, yapay zekâ araçları:</strong> Obsidian kasa listesi, Chrome, Brave, Edge ve Chromium yer imleri, Claude Code, Codex.</li>
+          <li><strong>Kurulu araçların listeleri:</strong> apt, dnf, pacman, Flatpak, Snap, Homebrew, npm, cargo, pipx, VS Code ve Cursor eklentileri.</li>
+        </ul>
+      </div>
+      <div class="box no reveal">
+        <h3>Kalanlar, ve nedeni</h3>
+        <ul>
+          <li><strong>Paketlerin kendisi:</strong> kopyalanmaz, yeni dağıtımın kendi yöneticisiyle yeniden kurulur.</li>
+          <li><strong>Tarayıcıda kayıtlı şifreler:</strong> eski makinenin secret service'i (GNOME Keyring ya da KWallet) onları mühürler. Tarayıcının kendi eşitlemesini ya da şifre dışa aktarmasını kullan.</li>
+          <li><strong>Sistem ayarları ve makinenin kimliği:</strong> <code>/etc</code>, Tailscale düğümü, uzak masaüstü kimlikleri gibi.</li>
+          <li><strong>Girişler:</strong> yapay zekâ araçlarına ve uygulamalara yeni makinede yeniden giriş yapılır.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="layout">
+  <div class="wrap split">
+    <div>
+      <span class="caps">Depoda</span>
+      <h2>GitHub'da yalnızca tanışma durur.</h2>
+      <pre class="tree"><span class="r">sen/linysync-bus/</span>           <span class="c"># özel</span>
+├── devices/
+│   ├── 7f3a2c91.json    <span class="c"># ad, sistem, görünüm, açık anahtar</span>
+│   └── c04e19b7.json
+├── requests/            <span class="c"># gönder ya da al, onay bekler</span>
+└── transfers/
+    └── 20261126-1605_7f3a2c91_c04e19b7/
+        ├── session.json <span class="c"># ilerleme</span>
+        ├── offer.sealed <span class="c"># gönderenin sundukları</span>
+        ├── picks.sealed <span class="c"># alanın seçtikleri</span>
+        └── key.sealed   <span class="c"># akış anahtarı ve adres</span></pre>
+    </div>
+    <div class="box reveal" style="margin-top:58px">
+      <h3>GitHub'a asla gitmeyenler</h3>
+      <ul>
+        <li>Dosyaların: makineden makineye giderler</li>
+        <li>Taşıdıkların hakkında okunabilir hiçbir şey: teklifler ve seçimler mühürlü</li>
+        <li>GitHub girişin: LinySync onu her seferinde GitHub CLI'dan ister</li>
+        <li>İşaretlemediğin her şey</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="family">
+  <div class="wrap">
+    <span class="caps">Aile</span>
+    <h2>Tek aile, <em>her türlü taşıma</em></h2>
+    <p class="sub">Aynı yapımcı, aynı görünüm. Aynı sistemden aynı sisteme taşıyanlar en derine iner, çünkü iki uç da aynı yolları ve ayarları paylaşır; AnySync sistemler arasında geçer; WavySync de Wave Terminal'i her yerde aynı tutar.</p>
+    <div class="fam">
+      <a class="fm" href="https://macysync.vercel.app/" style="--fa:#4c9dff;--fbg:#0a0e14;--fe:#2a3749"><svg viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path class="fb" d="M0 44 C 80 44 100 16 160 16 S 240 40 300 40"/><path class="fr" style="animation-delay:-0.0s" d="M0 44 C 80 44 100 16 160 16 S 240 40 300 40"/></svg><span class="fk">MYSY</span><b>Macy<i>~</i>Sync</b><span class="fl">Mac'ten Mac'e</span></a>
+      <a class="fm" href="https://windysync.vercel.app/" style="--fa:#67e8f9;--fbg:#0b1517;--fe:#1d3a40"><svg viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path class="fb" d="M0 42 H 232 C 266 42 274 16 254 10 C 238 6 226 22 240 30"/><path class="fr" style="animation-delay:-0.0s" d="M0 42 H 232 C 266 42 274 16 254 10 C 238 6 226 22 240 30"/><path class="fb" d="M40 24 H 170 C 186 24 190 12 180 10"/><path class="fr" style="animation-delay:-1.3s" d="M40 24 H 170 C 186 24 190 12 180 10"/></svg><span class="fk">WYSY</span><b>Windy<i>~</i>Sync</b><span class="fl">Windows'tan Windows'a</span></a>
+      <a class="fm here" href="https://linysync.vercel.app/" style="--fa:#fbbf24;--fbg:#14120e;--fe:#3a3122"><svg viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path class="fb" d="M0 46 H 70 V 30 H 160 V 46 H 214 V 16 H 300"/><path class="fr" style="animation-delay:-0.0s" d="M0 46 H 70 V 30 H 160 V 46 H 214 V 16 H 300"/><path class="fb" d="M30 20 H 120 V 8 H 190"/><path class="fr" style="animation-delay:-1.3s" d="M30 20 H 120 V 8 H 190"/></svg><span class="fk">LYSY</span><b>Liny<i>~</i>Sync</b><span class="fl">Linux'tan Linux'a, her dağıtım</span><span class="fh">buradasın</span></a>
+      <a class="fm" href="https://anysync.vercel.app/" style="--fa:#d946ef;--fbg:#120f1c;--fe:#2e2547"><svg viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path class="fb" d="M0 46 C 90 46 110 14 150 30 S 230 14 300 14"/><path class="fr" style="animation-delay:-0.0s" d="M0 46 C 90 46 110 14 150 30 S 230 14 300 14"/><path class="fb" d="M0 14 C 90 14 110 46 150 30 S 230 46 300 46"/><path class="fr" style="animation-delay:-1.3s" d="M0 14 C 90 14 110 46 150 30 S 230 46 300 46"/></svg><span class="fk">NYSYN</span><b>Any<i>~</i>Sync</b><span class="fl">macOS, Windows ve Linux arasında</span></a>
+      <a class="fm" href="https://wavysync.vercel.app/" style="--fa:#ff3355;--fbg:#120d19;--fe:#3a2d4f"><svg viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path class="fb" d="M0 30 C 25 10 50 10 75 30 S 125 50 150 30 S 200 10 225 30 S 275 50 300 30"/><path class="fr" style="animation-delay:-0.0s" d="M0 30 C 25 10 50 10 75 30 S 125 50 150 30 S 200 10 225 30 S 275 50 300 30"/></svg><span class="fk">WYSY</span><b>Wavy<i>~</i>Sync</b><span class="fl">Wave Terminal, her bilgisayarda aynı</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <span class="caps">İndir</span>
+    <h2><em>Liny~Sync</em>'i indir.</h2>
+    <div class="dl">
+      <a class="os" href="https://github.com/Ege-BULUT/LinySync/releases/latest/download/linysync-linux-x64.tar.gz"><b>Linux</b><span>x64 · her dağıtım</span><i>.tar.gz ↓</i></a>
+    </div>
+    <p class="note">Tek program: pencere ve komut satırı bir arada. <code>tar -xzf linysync-linux-x64.tar.gz</code>, sonra <code>./linysync</code>. Girişi yapılmış GitHub CLI ister (<code>gh auth login</code>). İlk sürüm henüz çıkmadı; çıkınca bu düğme onu indirir.</p>
+    <a class="more" href="download/">İndirme sayfası →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>LinySync · MIT · Ege BULUT</span>
+    <span>Linux Foundation ya da herhangi bir dağıtımla bağlantısı yoktur; Linux, Linus Torvalds'ın ticari markasıdır.</span>
+  </div>
+</footer>
+
+<script src="../site.js"></script>
+</body>
+</html>

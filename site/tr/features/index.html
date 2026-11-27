@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Özellikler: gönder ya da al, seç, taşı ve bitir, dağıtımdan dağıtıma · LinySync</title>
+<meta name="description" content="Diğer Linux makinesini seç, onayla, yenisinin alacaklarını işaretle, uçtan uca şifreli taşı ve paketler dahil kalanını GOAL.md ile yapay zekâ ajanına bırak.">
+<link rel="canonical" href="https://linysync.vercel.app/tr/features/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LinySync">
+<meta property="og:url" content="https://linysync.vercel.app/tr/features/">
+<meta property="og:title" content="Özellikler: gönder ya da al, seç, taşı ve bitir, dağıtımdan dağıtıma · LinySync">
+<meta property="og:description" content="Diğer Linux makinesini seç, onayla, yenisinin alacaklarını işaretle, uçtan uca şifreli taşı ve paketler dahil kalanını GOAL.md ile yapay zekâ ajanına bırak.">
+<meta property="og:image" content="https://linysync.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Özellikler: gönder ya da al, seç, taşı ve bitir, dağıtımdan dağıtıma · LinySync">
+<meta name="twitter:description" content="Diğer Linux makinesini seç, onayla, yenisinin alacaklarını işaretle, uçtan uca şifreli taşı ve paketler dahil kalanını GOAL.md ile yapay zekâ ajanına bırak.">
+<meta name="twitter:image" content="https://linysync.vercel.app/og.png">
+<meta name="theme-color" content="#14120e">
+<link rel="alternate" hreflang="en" href="https://linysync.vercel.app/features/">
+<link rel="alternate" hreflang="tr" href="https://linysync.vercel.app/tr/features/">
+<link rel="alternate" hreflang="x-default" href="https://linysync.vercel.app/features/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314120e'/%3E%3Cpath d='M4 23H12V14H20V9H25' fill='none' stroke='%23fbbf24' stroke-width='3' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='9' r='3' fill='%2314120e' stroke='%23fef3c7' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../site.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../"><span>Liny<b>~</b>Sync</span> <small>LYSY</small></a>
+    <div class="links">
+      <a href="../#how" class="opt">Nasıl çalışır</a>
+      <a href="../features/" class="on">Özellikler</a>
+      <a href="../docs/">Belgeler</a>
+      <a href="../changelog/" class="opt">Değişiklikler</a>
+      <a href="../#family" class="opt">Aile</a>
+      <a href="../download/">İndir</a>
+    </div>
+    <a class="btn lang" id="lang" href="../../features/" hreflang="en" aria-label="English">EN</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <span class="caps">Özellikler</span>
+    <h1><em>Liny~Sync</em> neler yapar</h1>
+    <p class="sub">İki makinede de çalışan ve yenisini, hangi dağıtımda olursa, eskisi gibi hissettiren küçük bir Rust uygulaması.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="frow reveal">
+      <div><span class="caps">DEVICE</span><h3>Her makine kendini çizer</h3><p>Cihaz sekmesinde bu makineyi adlandırır ve nasıl çizileceğini seçersin: dört renkten birinde bir laptop ya da masaüstü; ekranın altındaki küçük bir rozette <code>/etc/os-release</code>'ten okunan dağıtımının adıyla. Çizimlerin hepsi özgün şekiller; logo yok.</p></div>
+      <img src="../../device.png" width="2560" height="1560" alt="Her makine kendini çizer" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">CONNECT</span><h3>Hesabındaki makineler</h3><p>Bu hesaptaki cihazları bul, bus deponda kayıtlı her Linux makinesini listeler. Birini seç, göndermeyi ya da almayı seç; diğer makine sahibinin onaylayacağı ya da reddedeceği bir istek gösterir.</p></div>
+      <img src="../../find.png" width="2560" height="1560" alt="Hesabındaki makineler" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">PICK</span><h3>İşaretlediğin bir ağaç</h3><p>Gönderen elindekini tarar. Alan taraf bunu türlere göre gruplanmış bir ağaç olarak, her öğenin nereye ineceğiyle birlikte görür; bir grubu işaretlemek içindeki her şeyi işaretler.</p></div>
+      <img src="../../pick.png" width="2560" height="1560" alt="İşaretlediğin bir ağaç" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">MOVE</span><h3>Doğrudan, ve kaldığı yerden sürer</h3><p>Yalnızca seçilenler gider; ağın üzerinden makineden makineye, doğrulanmış bir XChaCha20-Poly1305 akışıyla. Bir dakika hiç bayt gelmezse bağlantı kopmuş sayılır ve alan taraf gelmeyenleri yeniden ister.</p></div>
+      <img src="../../sending.png" width="2560" height="1560" alt="Doğrudan, ve kaldığı yerden sürer" loading="lazy">
+    </div>
+    <div class="frow reveal">
+      <div><span class="caps">BRIEF</span><h3>Ajanının iş yapabileceği bir not</h3><p>Her öğe yeni ev klasörü altındaki yoluna iner; orada olan <code>.before-linysync</code> olarak saklanır. Sonra alan taraf GOAL.md'yi yazar: neyin nereye indiği, sorunlar, değişecek yollar ve paket listeleri; böylece ajanın aynı araçları bu dağıtımın yöneticisiyle kurar.</p></div>
+      <img src="../../done.png" width="2560" height="1560" alt="Ajanının iş yapabileceği bir not" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <span class="caps">Katalog</span>
+    <h2>Taşımayı bildiği her şey</h2>
+    <p class="sub">Her öğe ve yeni ev klasörü altında indiği yer.</p>
+    <div class="land fit"><table>
+      <thead><tr><th>Öğe</th><th>İndiği yer</th></tr></thead>
+      <tbody>
+      <tr><td>Masaüstü, Belgeler, İndirilenler, Resimler, Müzik, Videolar</td><td><code>~/…</code>, her üst öğe ayrı</td></tr>
+      <tr><td>Git ayarı</td><td><code>~/.gitconfig</code>, <code>~/.gitignore_global</code></td></tr>
+      <tr><td>SSH anahtarları ve ayarı</td><td><code>~/.ssh</code></td></tr>
+      <tr><td>GnuPG</td><td><code>~/.gnupg</code></td></tr>
+      <tr><td>zsh ve bash ayarları</td><td><code>~/.zshrc</code>, <code>~/.zprofile</code>, <code>~/.bashrc</code>, <code>~/.bash_profile</code></td></tr>
+      <tr><td>PowerShell profili</td><td><code>$XDG_CONFIG_HOME/powershell</code></td></tr>
+      <tr><td>VS Code, Cursor ve Zed ayarları</td><td><code>$XDG_CONFIG_HOME/Code/User</code>, <code>…/Cursor/User</code>, <code>…/zed</code></td></tr>
+      <tr><td>Wave ayarları</td><td><code>~/.config/waveterm</code></td></tr>
+      <tr><td>Obsidian kasa listesi</td><td><code>$XDG_CONFIG_HOME/obsidian/obsidian.json</code></td></tr>
+      <tr><td>Chrome, Brave, Edge ve Chromium yer imleri</td><td><code>$XDG_CONFIG_HOME/…/Default/Bookmarks</code></td></tr>
+      <tr><td>Claude Code ayarları, skill'ler, ajanlar, komutlar</td><td><code>~/.claude</code></td></tr>
+      <tr><td>Codex ayarı</td><td><code>~/.codex</code></td></tr>
+      </tbody></table></div>
+    <h2 style="margin-top:60px">Kurulu olanların listeleri</h2>
+    <p class="sub">Eski makinede her yöneticiyle yapılır ve metin olarak gider; ajanın yeni dağıtımınkiyle bunlardan kurar.</p>
+    <div class="land fit"><table>
+      <thead><tr><th>Liste</th><th>Yapıldığı komut</th></tr></thead>
+      <tbody>
+      <tr><td>apt, elle kurulanlar</td><td><code>apt-mark showmanual</code></td></tr>
+      <tr><td>dnf, elle kurulanlar</td><td><code>dnf repoquery --userinstalled</code></td></tr>
+      <tr><td>pacman, elle kurulanlar</td><td><code>pacman -Qqe</code></td></tr>
+      <tr><td>Flatpak uygulamaları</td><td><code>flatpak list --app</code></td></tr>
+      <tr><td>Snap paketleri</td><td><code>snap list</code></td></tr>
+      <tr><td>Homebrew</td><td><code>brew bundle dump</code></td></tr>
+      <tr><td>VS Code ve Cursor eklentileri</td><td><code>code --list-extensions</code></td></tr>
+      <tr><td>npm, cargo, pipx</td><td><code>npm ls -g</code>, <code>cargo install --list</code>, <code>pipx list</code></td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>LinySync · MIT · Ege BULUT</span>
+    <span>Linux Foundation ya da herhangi bir dağıtımla bağlantısı yoktur; Linux, Linus Torvalds'ın ticari markasıdır.</span>
+  </div>
+</footer>
+
+<script src="../../site.js"></script>
+</body>
+</html>

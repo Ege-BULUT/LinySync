@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://linysync.vercel.app/sitemap.xml
